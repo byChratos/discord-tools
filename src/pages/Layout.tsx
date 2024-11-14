@@ -1,10 +1,12 @@
+import React from "react";
 import NavigationBar from "../components/NavigationBar";
 
-function Layout() {
+function Layout({ children }: { children: React.ReactNode }) {
     
     return(
         <div className="w-full h-full flex flex-row bg-blue-500">
             <NavigationBar />
+            {children}
         </div>
     );
 }
