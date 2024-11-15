@@ -2,7 +2,7 @@
 function Home() {
 
     return(
-        <div>
+        <div className="w-full h-full">
             <p>Home Page</p>
         </div>
     )
