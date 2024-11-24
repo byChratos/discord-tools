@@ -1,6 +1,6 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
-import Layout from '../pages/Layout';
-import Home from '../pages/Home';
+import Layout from './Layout';
+import Home from '../pages/home/Home';
 import Timestamp from '../pages/timestamp/Timestamp';
 
 function Router() {
