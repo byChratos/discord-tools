@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import DateField from "./components/DateField";
+import DateField from "./components/date/DateField";
 import ModeField from "./components/mode/ModeField";
-import TimeField from "./components/TimeField";
+import TimeField from "./components/time/TimeField";
 import modes, { Mode } from "../../data/Modes";
 import { ModeContext } from "./components/mode/ModeContext";
 import { TimeContext } from "./components/time/TimeContext";
