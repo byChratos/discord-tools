@@ -9,7 +9,6 @@ function ModeField() {
     const selectedMode: Mode | undefined = context?.mode;
 
     if(context == null || selectedMode == undefined) {
-        console.log(context);
         {/** TODO Add Error Component */}
         return(
             <p>Error</p>

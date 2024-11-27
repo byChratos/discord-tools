@@ -6,9 +6,11 @@ import DatePicker from "./DatePicker";
 function DateField() {
 
     const context: DateContextType | null = useContext(DateContext);
-    const dateSelection: Date | undefined = context?.date;
+    const dateSelection: Date | null | undefined = context?.date;
 
-    if(context == null  || dateSelection == undefined) {
+    
+
+    if(context == null  || dateSelection == undefined || dateSelection == null) {
         //TODO Error Handler
         return(
             <p>ERROR</p>

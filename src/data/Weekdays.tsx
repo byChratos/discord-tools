@@ -1,0 +1,1 @@
+export const weekdays: Array<string> = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']

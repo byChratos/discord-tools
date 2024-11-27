@@ -12,6 +12,10 @@ import { invoke } from "@tauri-apps/api/core";
 
 function Timestamp() {
 
+    const [time, setTime] = useState<Time>({ hour: 12, minute: 0 });
+    const [date, setDate] = useState<Date | null>(null);
+    const [mode, setMode] = useState<Mode>(modes[0]);
+
     // Get current time and date of users system as default values
     useEffect(() => {
         invoke<Time>('get_time')
@@ -23,9 +27,10 @@ function Timestamp() {
             .catch((err) => console.error('Error loading date from Rust backend', err));
     }, []);
 
-    const [time, setTime] = useState<Time>({ hour: 12, minute: 0 });
-    const [date, setDate] = useState<Date>({ day: 1, month: 1, year: 2025 });
-    const [mode, setMode] = useState<Mode>(modes[0]);
+    function test() {
+        invoke<Array<DayToWeekday>>('get_days_of_month', { year: 2024, month: 10 })
+            .then((response) => console.log(response));
+    }
 
     return(
         <div className="w-full h-full p-3 flex flex-col">
@@ -41,7 +46,7 @@ function Timestamp() {
 
                         <ModeField />
 
-                        <button className="bg-green-500 mt-2 rounded-full p-2">Generate</button>
+                        <button onClick={() => test()} className="bg-green-500 mt-2 rounded-full p-2">Generate</button>
                     </ModeContext.Provider>
                 </DateContext.Provider>
             </TimeContext.Provider>
