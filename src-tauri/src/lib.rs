@@ -1,14 +1,14 @@
-use chrono::{Datelike, Local, NaiveDate, Timelike};
+use chrono::{Datelike, Local, NaiveDate, NaiveDateTime, NaiveTime, TimeZone, Timelike};
 use tauri::command;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 struct Time {
   hour: u32,
   minute: u32,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 struct Date {
   day: u32,
   month: u32,
@@ -19,6 +19,12 @@ struct Date {
 struct DayWeekday {
   day: u32,
   weekday: u8,
+}
+
+#[derive(Serialize, Deserialize)]
+struct Mode {
+  name: String,
+  flag: String
 }
 
 #[command]
@@ -63,6 +69,31 @@ fn get_days_of_month(month: u32, year: i32) -> Vec<DayWeekday> {
   day_list
 }
 
+#[command]
+fn generate_timestamp(time: Time, date: Date, mode: Mode) -> String {
+
+  //TODO let user select timezone
+
+  let naive_date = NaiveDate::from_ymd_opt(date.year, date.month, date.day)
+    .expect("Wrong date!");
+
+  let naive_time = NaiveTime::from_hms_opt(time.hour, time.minute, 0)
+    .expect("Wrong time!");
+
+  let naive_datetime = NaiveDateTime::new(naive_date, naive_time);
+  let local_datetime = Local.from_local_datetime(&naive_datetime).unwrap();
+
+  let unix = local_datetime.timestamp();
+
+  if mode.flag != "DO_NOT_SET" {
+    let formated_string = format!("<t:{}:{}>", unix, mode.flag);
+    return formated_string
+  } else {
+    let formated_string = format!("<t:{}>", unix);
+    return formated_string
+  }
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
@@ -76,7 +107,7 @@ pub fn run() {
       }
       Ok(())
     })
-    .invoke_handler(tauri::generate_handler![get_time, get_date, get_days_of_month])
+    .invoke_handler(tauri::generate_handler![get_time, get_date, get_days_of_month, generate_timestamp])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }

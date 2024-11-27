@@ -2,8 +2,8 @@ import { createContext, Dispatch, SetStateAction } from "react";
 import { Time } from "../../../../data/Time";
 
 export interface TimeContextType {
-    time: Time,
-    setTime: Dispatch<SetStateAction<Time>>
+    time: Time | null,
+    setTime: Dispatch<SetStateAction<Time | null>>
 }
 
 export const TimeContext = createContext<TimeContextType | null>(null);

@@ -12,7 +12,7 @@ import { invoke } from "@tauri-apps/api/core";
 
 function Timestamp() {
 
-    const [time, setTime] = useState<Time>({ hour: 12, minute: 0 });
+    const [time, setTime] = useState<Time | null>(null);
     const [date, setDate] = useState<Date | null>(null);
     const [mode, setMode] = useState<Mode>(modes[0]);
 
@@ -27,8 +27,9 @@ function Timestamp() {
             .catch((err) => console.error('Error loading date from Rust backend', err));
     }, []);
 
-    function test() {
-        console.log(date);
+    function generateTimestamp() {
+        invoke('generate_timestamp', { time: time, date: date, mode: mode})
+            .then((response) => console.log(response));
     }
 
     return(
@@ -45,12 +46,14 @@ function Timestamp() {
 
                         <ModeField />
 
-                        <button onClick={() => test()} className="bg-green-500 mt-2 rounded-full p-2">Generate</button>
+                        <button onClick={() => generateTimestamp()} className="bg-green-500 mt-2 rounded-full p-2">Generate</button>
                     </ModeContext.Provider>
                 </DateContext.Provider>
             </TimeContext.Provider>
         </div>
     )
+
+    {/* Popup Coming from the bottom like a page kinda? */}
 
 }
 
