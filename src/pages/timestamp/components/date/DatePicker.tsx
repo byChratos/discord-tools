@@ -16,16 +16,12 @@ function DatePicker({ date, setDate }: { date: Date, setDate: Dispatch<SetStateA
     }, []);
 
     useEffect(() => {
-        console.log("New Month: " + displayMonth + " and New Year: " + displayYear);
         recalculateWeekdays();
     }, [displayMonth, displayYear]);
 
     function recalculateWeekdays() {
         invoke<Array<DayToWeekday>>('get_days_of_month', { year: displayYear, month: displayMonth })
-            .then((response) => {
-                setDayWeekdayMap(response);
-                console.log(response);
-            });
+            .then((response) => {setDayWeekdayMap(response);});
     }
 
     function changeDisplayYear(modifier: number) {
@@ -49,6 +45,15 @@ function DatePicker({ date, setDate }: { date: Date, setDate: Dispatch<SetStateA
         }
 
         setDisplayMonth(displayMonth + modifier);
+    }
+
+    function selectDate(day: number) {
+        const newDate: Date = {
+            day: day,
+            month: displayMonth,
+            year: displayYear
+        };
+        setDate(newDate);
     }
 
     return(
@@ -81,9 +86,9 @@ function DatePicker({ date, setDate }: { date: Date, setDate: Dispatch<SetStateA
                     ))}
 
                     {dayWeekdayMap.map((dayObject) => (
-                        <div key={dayObject.day} className="border border-solid border-red-600">
+                        <button onClick={() => selectDate(dayObject.day)} key={dayObject.day} className="border border-solid border-red-600">
                             {dayObject.day}
-                        </div>
+                        </button>
                     ))}
                 </div>
             </div>

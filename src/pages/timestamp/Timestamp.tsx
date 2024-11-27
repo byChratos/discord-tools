@@ -28,8 +28,7 @@ function Timestamp() {
     }, []);
 
     function test() {
-        invoke<Array<DayToWeekday>>('get_days_of_month', { year: 2024, month: 10 })
-            .then((response) => console.log(response));
+        console.log(date);
     }
 
     return(
