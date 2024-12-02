@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
 import { TimeContext, TimeContextType } from "./TimeContext";
 import { Time } from "../../../../data/Time";
-import TimeSelector from "./TimeSelector";
+import { changeHour, changeMinute, nextHour, nextMinute, previousHour, previousMinute } from "../../../../data/TimeLib";
 
 function TimeField() {
 
     const context: TimeContextType | null = useContext(TimeContext);
     const timeSelection: Time | null | undefined = context?.time;
 
-    const [isSelectorOpen, setSelectorOpen] = useState<Boolean>(false);
+    const [isHourOpen, setHourOpen] = useState<Boolean>(false);
+    const [isMinuteOpen, setMinuteOpen] = useState<Boolean>(false);
 
     if(context == null  || timeSelection == undefined || timeSelection == null) {
         //TODO Error Handler
@@ -17,87 +18,67 @@ function TimeField() {
         )
     }
 
-    function previousHour(hour: number) {
-        if(hour > 0) {
-            return hour - 1;
+    function handleHourScroll(event: React.WheelEvent<HTMLDivElement>) {
+
+        if(timeSelection?.hour == undefined || timeSelection.minute == undefined || context?.setTime == undefined) {
+            return false;
         }
 
-        return 23;
-    }
-
-    function nextHour(hour: number) {
-        if(hour < 23) {
-            return hour + 1;
-        }
-
-        return 0;
-    }
-
-    function previousMinute(minute: number) {
-        if(minute > 0) {
-            return minute - 1;
-        }
-
-        return 59;
-    }
-
-    function nextMinute(minute: number) {
-        if(minute < 59) {
-            return minute + 1;
-        }
-
-        return 0;
-    }
-
-    function changeHour(hour: number, minute: number, modifier: number) {
-
-        let newHour: number;
-        if(modifier > 0) {
-            newHour = nextHour(hour);
+        let modifier: number;
+        if(event.deltaY > 0) {
+            modifier = -1;
         } else {
-            newHour = previousHour(hour);
+            modifier = +1;
         }
 
-        const newTime: Time = {
-            hour: newHour,
-            minute: minute
-        };
-        context?.setTime(newTime);
+        changeHour(timeSelection.hour, timeSelection.minute, modifier, context.setTime);
     }
 
-    function changeMinute(hour: number, minute: number, modifier: number) {
+    function handleMinuteScroll(event: React.WheelEvent<HTMLDivElement>) {
 
-        let newMinute: number;
-        if(modifier > 0) {
-            newMinute = nextMinute(minute);
-        } else {
-            newMinute = previousMinute(minute);
+        if(timeSelection?.hour == undefined || timeSelection.minute == undefined || context?.setTime == undefined) {
+            return false;
         }
 
-        const newTime: Time = {
-            hour: hour,
-            minute: newMinute
-        };
-        context?.setTime(newTime);
+        let modifier: number;
+        if(event.deltaY > 0) {
+            modifier = -1;
+        } else {
+            modifier = +1;
+        }
+
+        changeMinute(timeSelection.hour, timeSelection.minute, modifier, context.setTime);
     }
 
     return(
         <div className="w-full h-fit p-5 flex flex-row rounded-xl bg-red-300 mr-2">
 
-            <div className="h-full flex flex-col">
-                <button onClick={() => changeHour(timeSelection.hour, timeSelection.minute, +1)}>{nextHour(timeSelection.hour)}</button>
+            <div 
+                onMouseEnter={() => setHourOpen(true)}
+                onMouseLeave={() => setHourOpen(false)}
+                onWheel={handleHourScroll}
+                className="h-full flex flex-col"
+            >
+                {isHourOpen && <button onClick={() => changeHour(timeSelection.hour, timeSelection.minute, +1, context.setTime)}>{nextHour(timeSelection.hour)}</button>}
                 
-                <button>{timeSelection.hour}</button>
+                <button className="w-[75px] py-2 rounded-lg bg-yellow-300">{timeSelection.hour}</button>
                 
-                <button onClick={() => changeHour(timeSelection.hour, timeSelection.minute, -1)}>{previousHour(timeSelection.hour)}</button>
+                {isHourOpen && <button onClick={() => changeHour(timeSelection.hour, timeSelection.minute, -1, context.setTime)}>{previousHour(timeSelection.hour)}</button>}
             </div>
 
             <div className="w-[10px]"></div>
 
-            <div className="h-full flex flex-col">
-                <button onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, +1)}>{nextMinute(timeSelection.minute)}</button>
-                <button>{timeSelection.minute}</button>
-                <button onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, -1)}>{previousMinute(timeSelection.minute)}</button>
+            <div
+                onMouseEnter={() => setMinuteOpen(true)}
+                onMouseLeave={() => setMinuteOpen(false)}
+                onWheel={handleMinuteScroll}
+                className="h-full flex flex-col"
+            >
+                {isMinuteOpen && <button onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, +1, context.setTime)}>{nextMinute(timeSelection.minute)}</button>}
+
+                <button className="w-[75px] py-2 rounded-lg bg-yellow-300">{timeSelection.minute}</button>
+
+                {isMinuteOpen && <button onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, -1, context.setTime)}>{previousMinute(timeSelection.minute)}</button>}
             </div>
 
             {/* <p>{timeSelection.hour}:{timeSelection.minute}</p> */}
