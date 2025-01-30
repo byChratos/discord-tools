@@ -1,46 +1,43 @@
 import { Dispatch, SetStateAction } from "react";
 import { Time } from "./Time";
 
-export function previousHour(hour: number) {
-    if(hour > 0) {
-        return hour - 1;
+export function calculateHour(hour: number, modifier: number) {
+    //Calculates the hour when going forward x hours or back from a certain hour
+    //e.g. going 2 hours forward from 23 is 1, 3 from 23 is 2 etc.
+    
+    let sum: number = hour + modifier;
+
+    if(sum > 0) {
+        return sum % 24;
     }
 
-    return 23;
+    while(sum < 0) {
+        sum = 24 + sum;
+    }
+
+    return sum;
 }
 
-export function nextHour(hour: number) {
-    if(hour < 23) {
-        return hour + 1;
+export function calculateMinute(minute: number, modifier: number) {
+    //Same as calculateHour but for minutes
+
+    let sum: number = minute + modifier;
+
+    if(sum > 0) {
+        return sum % 60;
     }
 
-    return 0;
-}
-
-export function previousMinute(minute: number) {
-    if(minute > 0) {
-        return minute - 1;
+    while(sum < 0) {
+        sum = 60 + sum;
     }
 
-    return 59;
-}
-
-export function nextMinute(minute: number) {
-    if(minute < 59) {
-        return minute + 1;
-    }
-
-    return 0;
+    return sum;
 }
 
 export function changeHour(hour: number, minute: number, modifier: number, setTime: Dispatch<SetStateAction<Time | null>>) {
 
     let newHour: number;
-    if(modifier > 0) {
-        newHour = nextHour(hour);
-    } else {
-        newHour = previousHour(hour);
-    }
+    newHour = calculateHour(hour, modifier);
 
     const newTime: Time = {
         hour: newHour,
@@ -52,11 +49,7 @@ export function changeHour(hour: number, minute: number, modifier: number, setTi
 export function changeMinute(hour: number, minute: number, modifier: number, setTime: Dispatch<SetStateAction<Time | null>>) {
 
     let newMinute: number;
-    if(modifier > 0) {
-        newMinute = nextMinute(minute);
-    } else {
-        newMinute = previousMinute(minute);
-    }
+    newMinute = calculateMinute(minute, modifier);
 
     const newTime: Time = {
         hour: hour,

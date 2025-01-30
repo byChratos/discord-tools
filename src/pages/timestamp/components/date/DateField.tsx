@@ -18,7 +18,7 @@ function DateField() {
     }
 
     return(
-        <div className="w-full h-fit p-5 flex flex-row rounded-xl bg-red-300 ml-2">
+        <div className="w-full h-fit min-h-[150px] p-5 flex flex-row rounded-xl bg-red-300 ml-2">
 
             <p> {dateSelection.day}.{dateSelection.month}.{dateSelection.year} </p>
 

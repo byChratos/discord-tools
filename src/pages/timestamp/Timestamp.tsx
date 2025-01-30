@@ -33,7 +33,7 @@ function Timestamp() {
     }
 
     return(
-        <div className="w-full h-full p-3 flex flex-col">
+        <div className="w-full h-fit p-3 flex flex-col mt-auto mb-auto">
             <TimeContext.Provider value={{ time, setTime }}>
                 <DateContext.Provider value={{ date, setDate }}>
                     <ModeContext.Provider value={{ mode, setMode }}>
