@@ -79,6 +79,9 @@ jobs:
       - name: Update latest.json # Only once on the Linux step
         if: matrix.platform == 'ubuntu-22.04'
         run: |
+          GIST_ID="31cb792833287c12afe3371e4a9b7a03"
+          FILE_NAME="latest.json"
+
           JSON_CONTENT=$(jq -n \
             --arg version "${{ env.VERSION }}" \
             --arg pub_date "$(date -u +"%Y-%m-%dT%H:%M:%SZ")" \
@@ -98,9 +101,11 @@ jobs:
               }
             }')
 
+          echo "$JSON_CONTENT" | jq .
+
           # Gist aktualisieren
-          curl -X PATCH "https://api.github.com/gists/31cb792833287c12afe3371e4a9b7a03" \
+          curl -X PATCH "https://api.github.com/gists/$GIST_ID" \
             -H "Authorization: Bearer ${{ secrets.GIST_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            -d '{"files": {"latest.json": {"content": $JSON_CONTENT}}}'
+            -d '{"files": {"$FILE_NAME": {"content": $JSON_CONTENT}}}'
