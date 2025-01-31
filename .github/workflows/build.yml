@@ -87,7 +87,7 @@ jobs:
             --arg url_arm "https://github.com/byChratos/reponame/releases/download/discord-tools-${{ env.VERSION }}/discord-tools_aarch64.app.tar.gz" \
             --arg url_linux "https://github.com/byChratos/reponame/releases/download/discord-tools-${{ env.VERSION }}/discord-tools_${{ env.VERSION }}_amd64.AppImage" \
             --arg url_windows "https://github.com/byChratos/reponame/releases/download/discord-tools-${{ env.VERSION }}/discord-tools_${{ env.VERSION }}_x64-setup.exe" \
-            '{files: {"$FILE_NAME" {content: {version: $version, notes: $rel_notes, pub_date: $pub_date, platforms: { "darwin-x86_64": { signature: $pub_date, url: $url_x86 }, "darwin-aarch64": { signature: $pub_date, url: $url_arm }, "linux-x86_64": { "signature": $pub_date, url: $url_linux }, "windows-x86_64": { "signature": $pub_date, url: $url_windows }}}}}}'
+            '{files: {"$FILE_NAME": {content: {version: $version, notes: $rel_notes, pub_date: $pub_date, platforms: { "darwin-x86_64": { signature: $pub_date, url: $url_x86 }, "darwin-aarch64": { signature: $pub_date, url: $url_arm }, "linux-x86_64": { "signature": $pub_date, url: $url_linux }, "windows-x86_64": { "signature": $pub_date, url: $url_windows }}}}}}'
           )
 
           A=$(jq -n \
