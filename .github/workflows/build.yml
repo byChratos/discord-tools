@@ -75,7 +75,7 @@ jobs:
         run: |
           VERSION=$(jq -r .version package.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          
+
       - name: Update latest.json # Only once on the Linux step
         if: matrix.platform == 'ubuntu-22.04'
         run: |
@@ -103,4 +103,4 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.GIST_TOKEN }}" \
             -H "Accept: application/vnd.github.v3+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            -d "{files": {"latest.json": {"content": $JSON_CONTENT}}}"
+            -d '{"files": {"latest.json": {"content": $JSON_CONTENT}}}'
