@@ -100,7 +100,6 @@ jobs:
           )
 
           JSON_DATA=$(jq -n \
-              --arg
               '{files: $B}'
           )
 
