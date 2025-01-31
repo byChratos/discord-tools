@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "discord-tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "identifier": "de.cf.discord.tools",
   "build": {
     "frontendDist": "../dist",
@@ -33,5 +33,11 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [""],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDJGQTFGMjlBOTgwNjZBMjQKUldRa2FnYVltdktoTHhYVU5JMVgxWFhvczNYb1J5MFZpWDZMKzVJYU93R01uY2FGODNwOFlpaE4K"
+    }
   }
 }

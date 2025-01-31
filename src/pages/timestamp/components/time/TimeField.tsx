@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { TimeContext, TimeContextType } from "./TimeContext";
 import { Time } from "../../../../data/Time";
-import { calculateHour, calculateMinute, changeHour, changeMinute } from "../../../../data/TimeLib";
+import { calculateHour, calculateMinute, changeHour, changeMinute } from "../../../../libraries/TimeLib";
 
 function TimeField() {
 

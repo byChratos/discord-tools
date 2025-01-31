@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Time } from "./Time";
+import { Time } from "../data/Time";
 
 export function calculateHour(hour: number, modifier: number) {
     //Calculates the hour when going forward x hours or back from a certain hour
