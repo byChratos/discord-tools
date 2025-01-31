@@ -86,7 +86,7 @@ jobs:
             --arg url_arm "https://github.com/byChratos/reponame/releases/download/discord-tools-${{ env.VERSION }}/discord-tools_aarch64.app.tar.gz" \
             --arg url_linux "https://github.com/byChratos/reponame/releases/download/discord-tools-${{ env.VERSION }}/discord-tools_${{ env.VERSION }}_amd64.AppImage" \
             --arg url_windows "https://github.com/byChratos/reponame/releases/download/discord-tools-${{ env.VERSION }}/discord-tools_${{ env.VERSION }}_x64-setup.exe" \
-            \"{
+            \'{
               \"version\": $version,
               \"notes\": \"Your Release Notes go here\",
               \"pub_date\": $pub_date,
@@ -96,9 +96,11 @@ jobs:
                 \"linux-x86_64\": { \"signature\": \"Content of app.AppImage.tar.gz.sig\", \"url\": $url_linux },
                 \"windows-x86_64\": { \"signature\": \"Content of app-setup.nsis.sig\", \"url\": $url_windows }
               }
-            }\")
+            }\')
 
-          echo "$JSON_CONTENT" | jq .
+          data='{\"files\": {$FILE_NAME: {\"content\": $JSON_CONTENT} } }'
+
+          echo "$data" | jq .
 
           # Gist aktualisieren
           curl -L \
@@ -107,4 +109,4 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.GIST_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            -d '{"files": {$FILE_NAME: {"content": $JSON_CONTENT} } }'
+            -d "$data"
