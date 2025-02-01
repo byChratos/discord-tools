@@ -96,8 +96,9 @@ jobs:
         run: |
           GIST_ID="31cb792833287c12afe3371e4a9b7a03"
 
-          CONFIG_JSON=$(envsubst < templates/latest.json | jq -c .)
-          echo "CONFIG_JSON=$CONFIG_JSON" >> $GITHUB_ENV
+          CONFIG_CONTENT=$(envsubst < templates/latest.json | jq -c .)
+          PAYLOAD=$(jq -n --arg content "$CONFIG_CONTENT" '{files: {"latest.json": {content: $content}}}')
+          echo "PAYLOAD=$PAYLOAD" >> $GITHUB_ENV
 
           # Gist aktualisieren
           curl -L \
@@ -106,4 +107,4 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.GIST_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            -d "$CONFIG_JSON"
+            -d "$PAYLOAD"
