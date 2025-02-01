@@ -79,7 +79,7 @@ jobs:
           echo "FILE_NAME=latest.json" >> $GITHUB_ENV
           echo "VERSION=${{ env.VERSION }}" >> $GITHUB_ENV
           echo "PUB_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
-          echo "NOTES=MY-RELEASE-NOTES" >> $GITHUB_ENV
+          echo "NOTES=See the description of the respective release to discover what is new! https://github.com/byChratos/discord-tools/releases" >> $GITHUB_ENV
 
           echo "SIGN_darwin_x86=a" >> $GITHUB_ENV
           echo "SIGN_darwin_arm=a" >> $GITHUB_ENV
