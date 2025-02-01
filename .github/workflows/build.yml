@@ -98,7 +98,6 @@ jobs:
 
           CONFIG_CONTENT=$(envsubst < templates/latest.json | jq -c .)
           PAYLOAD=$(jq -n --arg content "$CONFIG_CONTENT" '{files: {"latest.json": {content: $content}}}')
-          echo "PAYLOAD=$PAYLOAD" >> $GITHUB_ENV
 
           # Gist aktualisieren
           curl -L \
