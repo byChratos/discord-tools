@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "discord-tools",
-  "version": "0.1.1",
+  "version": "../package.json",
   "identifier": "de.cf.discord.tools",
   "build": {
     "frontendDist": "../dist",
