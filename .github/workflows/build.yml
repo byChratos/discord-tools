@@ -97,6 +97,7 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Set Environment Variables
+        working-directory: ./discord-tools/discord-tools
         run: |
           echo "VERSION=${{ env.VERSION }}" >> $GITHUB_ENV
           echo "PUB_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
