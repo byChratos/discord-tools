@@ -66,6 +66,12 @@ jobs:
           prerelease: false
           args: ${{ matrix.args }}
 
+      - name: Upload Signatures
+        uses: actions/upload-artifact@v3
+        with:
+          name: signatures
+          path: "*.sig"
+
       - name: Get version from package.json
         id: get_version
         if: matrix.platform == 'ubuntu-22.04'
@@ -80,8 +86,8 @@ jobs:
           echo "PUB_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
           echo "NOTES=See the description of the respective release to discover what is new! https://github.com/byChratos/discord-tools/releases" >> $GITHUB_ENV
 
-          echo "SIGN_darwin_x86=$(cat src-tauri/target/aarch64-apple-darwin/release/bundle/macos/discord-tools_x64.app.tar.gz.sig 2>/dev/null || echo 'No Signature')" >> $GITHUB_ENV
-          echo "SIGN_darwin_arm=$(cat src-tauri/target/x86_64-apple-darwin/release/bundle/macos/discord-tools_aarch64.app.tar.gz.sig 2>/dev/null || echo 'No Signature')" >> $GITHUB_ENV
+          echo "SIGN_darwin_x86=$(cat src-tauri/target/x86_64-apple-darwin/release/bundle/macos/discord-tools.app.tar.gz.sig 2>/dev/null || echo 'No Signature')" >> $GITHUB_ENV
+          echo "SIGN_darwin_arm=$(cat src-tauri/target/aarch64-apple-darwin/release/bundle/macos/discord-tools.app.tar.gz.sig 2>/dev/null || echo 'No Signature')" >> $GITHUB_ENV
           echo "SIGN_linux=$(cat src-tauri/target/release/bundle/appimage/discord-tools_${{ env.VERSION }}_amd64.AppImage.sig 2>/dev/null || echo 'No Signature')" >> $GITHUB_ENV
           echo "SIGN_win=$(cat src-tauri\target\release\bundle\nsis\discord-tools_${{ env.VERSION }}_x64-setup.exe.sig 2>/dev/null || echo 'No Signature')" >> $GITHUB_ENV
 
@@ -94,10 +100,9 @@ jobs:
         if: matrix.platform == 'ubuntu-22.04'
         run: |
           GIST_ID="${{ vars.GIST_ID }}"
-          FILE_NAME="${{ vars.FILE_NAME }}"
 
           CONFIG_CONTENT=$(envsubst < templates/latest.json | jq -c .)
-          PAYLOAD=$(jq -n --arg content "$CONFIG_CONTENT" --arg file "$FILE_NAME" '{files: {"$file": {content: $content}}}')
+          PAYLOAD=$(jq -n --arg content "$CONFIG_CONTENT" '{files: {latest.json: {content: $content}}}')
 
           # Gist aktualisieren
           curl -L \
