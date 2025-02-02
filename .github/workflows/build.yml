@@ -17,12 +17,16 @@ jobs:
       matrix:
         include:
           - platform: 'macos-latest' # Arm Macs
+            arch: arm
             args: '--target aarch64-apple-darwin'
           - platform: 'macos-latest' # Intel Macs
+            arch: x86_64
             args: '--target x86_64-apple-darwin'
           - platform: 'ubuntu-22.04'
+            arch: x86_64
             args: ''
           - platform: 'windows-latest'
+            arch: x86_64
             args: ''
 
     runs-on: ${{ matrix.platform }}
@@ -69,7 +73,7 @@ jobs:
       - name: Upload Signatures
         uses: actions/upload-artifact@v4
         with:
-          name: signatures-${{ matrix.platform }}
+          name: signatures-${{ matrix.platform }}-${{ matrix.arch }}
           path: "**/*.sig"
 
   update-latest:
