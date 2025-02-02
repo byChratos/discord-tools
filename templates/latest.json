@@ -5,19 +5,19 @@
     "platforms": {
         "darwin-x86_64": {
             "signature": "${SIGN_darwin_x86}",
-            "url": "${$URL_darwin_x86}"
+            "url": "${URL_darwin_x86}"
         },
         "darwin-aarch64": {
             "signature": "${SIGN_darwin_arm}",
-            "url": "${$URL_darwin_arm}"
+            "url": "${URL_darwin_arm}"
         },
         "linux-x86_64": { 
             "signature": "${SIGN_linux}",
-            "url": "${$URL_linux}"
+            "url": "${URL_linux}"
         },
         "windows-x86_64": {
             "signature": "${SIGN_win}",
-            "url": "${$URL_win}"
+            "url": "${URL_win}"
         }
     }
 }
