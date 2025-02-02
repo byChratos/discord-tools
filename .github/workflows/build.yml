@@ -73,10 +73,13 @@ jobs:
           path: "**/*.sig"
 
   update-latest:
+    needs: publish-tauri
     permissions:
       contents: read
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download signatures
         uses: actions/download-artifact@v4
         with:
