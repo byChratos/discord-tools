@@ -117,7 +117,7 @@ jobs:
           GIST_ID="${{ vars.GIST_ID }}"
 
           CONFIG_CONTENT=$(envsubst < templates/latest.json | jq -c .)
-          PAYLOAD=$(jq -n --arg content "$CONFIG_CONTENT" '{files: {latest.json: {content: $content}}}')
+          PAYLOAD=$(jq -n --arg content "$CONFIG_CONTENT" '{files: {"latest.json": {content: $content}}}')
 
           # Gist aktualisieren
           curl -L \
