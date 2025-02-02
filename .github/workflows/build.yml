@@ -97,7 +97,7 @@ jobs:
           FILE_NAME="${{ vars.FILE_NAME }}"
 
           CONFIG_CONTENT=$(envsubst < templates/latest.json | jq -c .)
-          PAYLOAD=$(jq -n --arg content "$CONFIG_CONTENT" --arg file "$FILE_NAME" '{files: {$file: {content: $content}}}')
+          PAYLOAD=$(jq -n --arg content "$CONFIG_CONTENT" --arg file "$FILE_NAME" '{files: {"$file": {content: $content}}}')
 
           # Gist aktualisieren
           curl -L \
