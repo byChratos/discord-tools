@@ -37,7 +37,7 @@
   },
   "plugins": {
     "updater": {
-      "endpoints": ["https://gist.githubusercontent.com/byChratos/31cb792833287c12afe3371e4a9b7a03/raw/452ed01a7a18f74d790e6aed86c0e41f6822dc58/latest.json"],
+      "endpoints": ["https://gist.githubusercontent.com/byChratos/31cb792833287c12afe3371e4a9b7a03/raw/latest.json"],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDJGQTFGMjlBOTgwNjZBMjQKUldRa2FnYVltdktoTHhYVU5JMVgxWFhvczNYb1J5MFZpWDZMKzVJYU93R01uY2FGODNwOFlpaE4K"
     }
   }
