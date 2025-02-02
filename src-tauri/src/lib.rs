@@ -97,6 +97,7 @@ fn generate_timestamp(time: Time, date: Date, mode: Mode) -> String {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             if cfg!(debug_assertions) {
                 app.handle().plugin(

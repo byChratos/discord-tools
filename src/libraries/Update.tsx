@@ -5,9 +5,9 @@ import { invoke } from "@tauri-apps/api/core";
 export async function checkForAppUpdates(onUserClick: boolean) {
     const update = await check();
     if (update === null) {
-        await message('Failed to check for updates.\nPlease try again later.', { 
-            title: 'Error',
-            kind: 'error',
+        await message('No updates available.\nYou are already on the newest version!', { 
+            title: 'Update not available',
+            kind: 'info',
             okLabel: 'OK'
         });
         return;
