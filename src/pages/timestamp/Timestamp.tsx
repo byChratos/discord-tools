@@ -9,12 +9,15 @@ import { Time } from "../../data/Time";
 import { DateContext } from "./components/date/DateContext";
 import { Date } from "../../data/Date";
 import { invoke } from "@tauri-apps/api/core";
+import Message from "./components/Message";
 
 function Timestamp() {
 
     const [time, setTime] = useState<Time | null>(null);
     const [date, setDate] = useState<Date | null>(null);
     const [mode, setMode] = useState<Mode>(modes[0]);
+
+    const [result, setResult] = useState<String>("Generate a timestamp above!");
 
     // Get current time and date of users system as default values
     useEffect(() => {
@@ -28,8 +31,8 @@ function Timestamp() {
     }, []);
 
     function generateTimestamp() {
-        invoke('generate_timestamp', { time: time, date: date, mode: mode})
-            .then((response) => console.log(response));
+        invoke<String>('generate_timestamp', { time: time, date: date, mode: mode})
+            .then((response) => setResult(response));
     }
 
     return(
@@ -47,6 +50,7 @@ function Timestamp() {
                         <ModeField />
 
                         <button onClick={() => generateTimestamp()} className="bg-green-500 mt-2 rounded-full p-2">Generate</button>
+                        <Message message={result}/>
                     </ModeContext.Provider>
                 </DateContext.Provider>
             </TimeContext.Provider>
