@@ -51,10 +51,10 @@ function TimeField() {
     }
 
     return(
-        <div className="w-full h-fit min-h-[150px] p-5 flex flex-row rounded-xl bg-red-300 mr-2">
+        <div className="w-full h-fit min-h-[150px] p-5 flex flex-row rounded-xl bg-darkAccent mr-2">
 
             <div className="w-fit h-fit mt-auto mb-auto p-5">
-                <h2 className="text-2xl"> Time </h2>
+                <h2 className="text-2xl text-white"> Time </h2>
             </div>
             
 
@@ -64,13 +64,13 @@ function TimeField() {
                 onWheel={handleHourScroll}
                 className="h-full flex flex-col ml-auto mt-auto mb-auto"
             >
-                {isHourOpen && <button className="text-xs" onClick={() => changeHour(timeSelection.hour, timeSelection.minute, +2, context.setTime)}>{calculateHour(timeSelection.hour, +2)}</button>}
-                {isHourOpen && <button className="text-lg" onClick={() => changeHour(timeSelection.hour, timeSelection.minute, +1, context.setTime)}>{calculateHour(timeSelection.hour, +1)}</button>}
+                {isHourOpen && <button className="text-xs text-white" onClick={() => changeHour(timeSelection.hour, timeSelection.minute, +2, context.setTime)}>{calculateHour(timeSelection.hour, +2)}</button>}
+                {isHourOpen && <button className="text-lg text-white" onClick={() => changeHour(timeSelection.hour, timeSelection.minute, +1, context.setTime)}>{calculateHour(timeSelection.hour, +1)}</button>}
                 
-                <button className="w-[75px] py-2 rounded-lg bg-yellow-300 text-2xl">{timeSelection.hour}</button>
+                <button className="w-[75px] py-2 rounded-lg bg-blue-900 text-2xl text-white">{timeSelection.hour}</button>
                 
-                {isHourOpen && <button className="text-lg" onClick={() => changeHour(timeSelection.hour, timeSelection.minute, -1, context.setTime)}>{calculateHour(timeSelection.hour, -1)}</button>}
-                {isHourOpen && <button className="text-xs" onClick={() => changeHour(timeSelection.hour, timeSelection.minute, -2, context.setTime)}>{calculateHour(timeSelection.hour, -2)}</button>}
+                {isHourOpen && <button className="text-lg text-white" onClick={() => changeHour(timeSelection.hour, timeSelection.minute, -1, context.setTime)}>{calculateHour(timeSelection.hour, -1)}</button>}
+                {isHourOpen && <button className="text-xs text-white" onClick={() => changeHour(timeSelection.hour, timeSelection.minute, -2, context.setTime)}>{calculateHour(timeSelection.hour, -2)}</button>}
             </div>
 
             <div className="w-[10px]"></div>
@@ -81,13 +81,13 @@ function TimeField() {
                 onWheel={handleMinuteScroll}
                 className="h-full flex flex-col mr-auto mt-auto mb-auto"
             >
-                {isMinuteOpen && <button className="text-xs" onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, +2, context.setTime)}>{calculateMinute(timeSelection.minute, +2)}</button>}
-                {isMinuteOpen && <button className="text-lg" onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, +1, context.setTime)}>{calculateMinute(timeSelection.minute, +1)}</button>}
+                {isMinuteOpen && <button className="text-xs text-white" onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, +2, context.setTime)}>{calculateMinute(timeSelection.minute, +2)}</button>}
+                {isMinuteOpen && <button className="text-lg text-white" onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, +1, context.setTime)}>{calculateMinute(timeSelection.minute, +1)}</button>}
 
-                <button className="w-[75px] py-2 rounded-lg bg-yellow-300 text-2xl">{timeSelection.minute}</button>
+                <button className="w-[75px] py-2 rounded-lg bg-blue-900 text-2xl text-white">{timeSelection.minute}</button>
 
-                {isMinuteOpen && <button className="text-lg" onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, -1, context.setTime)}>{calculateMinute(timeSelection.minute, -1)}</button>}
-                {isMinuteOpen && <button className="text-xs" onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, -2, context.setTime)}>{calculateMinute(timeSelection.minute, -2)}</button>}
+                {isMinuteOpen && <button className="text-lg text-white" onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, -1, context.setTime)}>{calculateMinute(timeSelection.minute, -1)}</button>}
+                {isMinuteOpen && <button className="text-xs text-white" onClick={() => changeMinute(timeSelection.hour, timeSelection.minute, -2, context.setTime)}>{calculateMinute(timeSelection.minute, -2)}</button>}
             </div>
 
             {/* <p>{timeSelection.hour}:{timeSelection.minute}</p> */}
