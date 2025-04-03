@@ -1,3 +1,11 @@
-import { createContext } from 'react';
+import { createContext, Dispatch, SetStateAction } from 'react';
 
-export const ThemeContext = createContext('light');
+interface themeTypes {
+    theme: string | null,
+    setTheme: Dispatch<SetStateAction<string | null>>
+}
+
+export const ThemeContext = createContext<themeTypes>({
+    theme: null,
+    setTheme: () => {}
+});

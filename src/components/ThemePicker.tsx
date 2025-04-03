@@ -1,30 +1,31 @@
-import { load, Store } from '@tauri-apps/plugin-store';
-import { useEffect, useState } from 'react';
+import { Store } from '@tauri-apps/plugin-store';
+import { useContext, useEffect, useState } from 'react';
+import { getStore } from '../libraries/Store';
+import { ThemeContext } from './ThemeContext';
 
 function ThemePicker() {
 
     const [store, setStore] = useState<Store | null>(null);
+    const { theme, setTheme } = useContext(ThemeContext);
 
     useEffect(() => {
-        async function getStore() {
-            const loadedStore = await load('store.json', { autoSave: false });
-            setStore(loadedStore);
-        }
-
-        getStore();
+        getStore(setStore, 'store.json', false);
     }, []);
 
-    function setTheme(to: string) {
+    function changeTheme(to: string) {
         store?.set('theme', to);
         store?.save();
+
+        setTheme(to);
     }
 
     return(
         <div>
-            <button className="text-white" onClick={() => setTheme('light')}>Light</button>
-            <button className="text-white" onClick={() => setTheme('ash')}>Ash</button>
-            <button className="text-white" onClick={() => setTheme('dark')}>Dark</button>
-            <button className="text-white" onClick={() => setTheme('onyx')}>Onyx</button>
+            <p className='text-white'>Current Theme: {theme}</p>
+            <button className="text-white" onClick={() => changeTheme('light')}>Light</button>
+            <button className="text-white" onClick={() => changeTheme('ash')}>Ash</button>
+            <button className="text-white" onClick={() => changeTheme('dark')}>Dark</button>
+            <button className="text-white" onClick={() => changeTheme('onyx')}>Onyx</button>
         </div>
     )
 }
