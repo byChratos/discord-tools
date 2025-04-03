@@ -2,8 +2,11 @@ import { useContext, useState } from "react";
 import { TimeContext, TimeContextType } from "./TimeContext";
 import { Time } from "../../../../data/Time";
 import { calculateHour, calculateMinute, changeHour, changeMinute } from "../../../../libraries/TimeLib";
+import { ThemeContext } from "../../../../components/ThemeContext";
 
 function TimeField() {
+
+    const { theme } = useContext(ThemeContext);
 
     const context: TimeContextType | null = useContext(TimeContext);
     const timeSelection: Time | null | undefined = context?.time;
@@ -51,7 +54,7 @@ function TimeField() {
     }
 
     return(
-        <div className="w-full h-fit min-h-[150px] p-5 flex flex-row rounded-xl bg-darkAccent mr-2">
+        <div className={`w-full h-fit min-h-[150px] p-5 flex flex-row rounded-xl bg-bgSecondary mr-2 theme-${theme}`}>
 
             <div className="w-fit h-fit mt-auto mb-auto p-5">
                 <h2 className="text-2xl text-white"> Time </h2>

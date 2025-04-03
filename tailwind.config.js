@@ -10,21 +10,12 @@ export default {
         square: '1 / 1',
       },
       colors: {
-        primary: '#ffffff',
-        secondary: '#000000',
-        backgroundLight: '#f6eee3',
-
-        lightBackground: '#f3f3f4',
-        lightAccent: '#fbfbfb',
-
-        ashBackground: '#28282d',
-        ashAccent: '#2e2e34',
-
-        darkBackground: '#121214',
-        darkAccent: '#1a1a1e',
-
-        onyxBackground: '#000000',
-        onyxAccent: '#070709',
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        textPrimary: "var(--color-textPrimary)",
+        textSecondary: "var(--color-textSecondary)",
+        bgPrimary: "var(--color-bgPrimary)",
+        bgSecondary: "var(--color-bgSecondary)",
       },
     },
   },

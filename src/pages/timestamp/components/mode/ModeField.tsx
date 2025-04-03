@@ -19,7 +19,7 @@ function ModeField() {
         <div className="w-full h-fit p-5 flex rounded-xl bg-red-300 mt-2">
             <div className="w-fit h-fit ml-auto mr-auto">
                 {modes.map((mode, index) => (
-                    <ModeButton mode={mode} context={context} className={index != 0 ? `ml-2` : ``}/>
+                    <ModeButton key={index} mode={mode} context={context} className={index != 0 ? `ml-2` : ``}/>
                 ))}
             </div>
             {/*TODO Select One Menu */}

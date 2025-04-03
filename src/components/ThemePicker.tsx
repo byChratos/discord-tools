@@ -21,11 +21,11 @@ function ThemePicker() {
 
     return(
         <div>
-            <p className='text-white'>Current Theme: {theme}</p>
-            <button className="text-white" onClick={() => changeTheme('light')}>Light</button>
-            <button className="text-white" onClick={() => changeTheme('ash')}>Ash</button>
-            <button className="text-white" onClick={() => changeTheme('dark')}>Dark</button>
-            <button className="text-white" onClick={() => changeTheme('onyx')}>Onyx</button>
+            <p className='text-red-500'>Current Theme: {theme}</p>
+            <button className="text-red-500" onClick={() => changeTheme('light')}>Light</button>
+            <button className="text-red-500" onClick={() => changeTheme('ash')}>Ash</button>
+            <button className="text-red-500" onClick={() => changeTheme('dark')}>Dark</button>
+            <button className="text-red-500" onClick={() => changeTheme('onyx')}>Onyx</button>
         </div>
     )
 }

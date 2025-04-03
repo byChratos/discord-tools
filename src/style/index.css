@@ -6,3 +6,41 @@ html, body, #root {
   height: 100%;
   width: 100%;
 }
+
+@layer base {
+  :root {
+    --color-primary: #1dd41d;
+    --color-secondary: #ffffff;
+    --color-textPrimary: #ffffff;
+    --color-textSecondary: #ffffff;
+    --color-bgPrimary: #28282d;
+    --color-bgSecondary: #2e2e34;
+  }
+}
+
+.theme-light {
+  --color-primary: #1dd41d;
+  --color-secondary: #ffffff;
+  --color-textPrimary: #000000;
+  --color-textSecondary: #000000;
+  --color-bgPrimary: #f3f3f4;
+  --color-bgSecondary: #fbfbfb;
+}
+
+.theme-dark {
+  --color-primary: #1dd41d;
+  --color-secondary: #ffffff;
+  --color-textPrimary: #ffffff;
+  --color-textSecondary: #ffffff;
+  --color-bgPrimary: #121214;
+  --color-bgSecondary: #1a1a1e;
+}
+
+.theme-onyx {
+  --color-primary: #1dd41d;
+  --color-secondary: #ffffff;
+  --color-textPrimary: #ffffff;
+  --color-textSecondary: #ffffff;
+  --color-bgPrimary: #000000;
+  --color-bgSecondary: #070709;
+}
