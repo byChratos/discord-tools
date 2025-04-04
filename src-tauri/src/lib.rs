@@ -72,6 +72,15 @@ fn get_days_of_month(month: u32, year: i32) -> Vec<DayWeekday> {
 }
 
 #[command]
+fn get_days_count_of_month(month: u32, year: i32) -> u32 {
+    NaiveDate::from_ymd_opt(year, month + 1, 1)
+        .unwrap_or_else(|| NaiveDate::from_ymd_opt(year + 1, 1, 1).unwrap())
+        .pred_opt()
+        .unwrap()
+        .day()
+}
+
+#[command]
 fn generate_timestamp(time: Time, date: Date, mode: Mode) -> String {
     //TODO let user select timezone
 
@@ -96,6 +105,7 @@ fn generate_timestamp(time: Time, date: Date, mode: Mode) -> String {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_store::Builder::new().build())
         //.plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
@@ -107,13 +117,16 @@ pub fn run() {
                 )?;
             }
             #[cfg(desktop)]
-            let _ = app.handle().plugin(tauri_plugin_updater::Builder::new().build());
+            let _ = app
+                .handle()
+                .plugin(tauri_plugin_updater::Builder::new().build());
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             get_time,
             get_date,
             get_days_of_month,
+            get_days_count_of_month,
             generate_timestamp
         ])
         .run(tauri::generate_context!())
