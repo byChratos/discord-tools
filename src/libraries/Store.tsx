@@ -1,6 +1,8 @@
-import { load } from "@tauri-apps/plugin-store";
+import { load, Store } from "@tauri-apps/plugin-store";
 
-export async function getStore(setStore: Function, name: string, autoSave: boolean) {
-    const store = await load(name, { autoSave: autoSave });
-    setStore(store);
+export async function getValueFromStore(storeName: string, key: string): Promise<string | undefined> {
+    const store: Store = await load(storeName, { autoSave: false });
+    const storeValue: string | undefined = await store.get(key);
+    store.close();
+    return storeValue;
 }

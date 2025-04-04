@@ -1,6 +1,5 @@
-import { Store } from '@tauri-apps/plugin-store';
+import { load, Store } from '@tauri-apps/plugin-store';
 import { useContext, useEffect, useState } from 'react';
-import { getStore } from '../libraries/Store';
 import { ThemeContext } from './ThemeContext';
 
 function ThemePicker() {
@@ -9,7 +8,9 @@ function ThemePicker() {
     const { theme, setTheme } = useContext(ThemeContext);
 
     useEffect(() => {
-        getStore(setStore, 'store.json', false);
+        load('store.json', { autoSave: false }).then(loadedStore => {
+            setStore(loadedStore);
+        });
     }, []);
 
     function changeTheme(to: string) {
