@@ -11,7 +11,7 @@ function GenerateButton({result, setResult, onClick}: {result: string | null, se
     }
 
     return(
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-5">
             <button className="bg-green-500 rounded-lg py-6 px-[60px] text-2xl" onClick={() => onClick()}>Generate</button>
             {result != null && <button className="w-fit h-fit bg-white rounded-md p-2 mt-[-20px] text-md" onClick={handleClick}>{result}</button>}
         </div>

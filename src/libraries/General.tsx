@@ -1,4 +1,8 @@
 // Returns a list of numbers with from as the first element and to as the last
+
+import { months } from "../data/Date";
+import modes, { EMPTY_FLAG } from "../data/Modes";
+
 // range(1, 3) => [1, 2, 3]
 export function range(from: number, to: number): number[] {
     let list: number[] = new Array<number>();
@@ -23,4 +27,26 @@ export function elementAtRelativeIndex(list: any[], element: any, relativeIndex:
     }
 
     return list[newIndex];
+}
+
+export function getModeFlagFromName(name: string): string {
+    for(const mode of modes) {
+        if(name == mode.name) {
+            return mode.flag;
+        }
+    }
+    return EMPTY_FLAG;
+}
+
+export function getAllModeNames(): string[] {
+    let modeList = Array<string>();
+    for(const mode of modes) {
+        modeList.push(mode.name);
+    }
+    return modeList;
+}
+
+export function getNumberOfMonth(month: string): number {
+    const num: number = months.indexOf(month) + 1;
+    return num;
 }

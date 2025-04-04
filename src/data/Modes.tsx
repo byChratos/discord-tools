@@ -16,21 +16,4 @@ const modes: Mode[] = [
     { name: "Relative Time", flag: "R" }
 ]
 
-export function getModeFlagFromName(name: string): string {
-    for(const mode of modes) {
-        if(name == mode.name) {
-            return mode.flag;
-        }
-    }
-    return EMPTY_FLAG;
-}
-
-export function getAllModeNames(): string[] {
-    let modeList = Array<string>();
-    for(const mode of modes) {
-        modeList.push(mode.name);
-    }
-    return modeList;
-}
-
 export default modes;

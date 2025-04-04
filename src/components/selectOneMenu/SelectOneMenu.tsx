@@ -3,7 +3,7 @@ import SelectOneMenuButton from "./SelectOneMenuButton";
 
 function SelectOneMenu({allOptions, selectedOption, setSelectedOption}: {allOptions: string[], selectedOption: string, setSelectedOption: Dispatch<SetStateAction<string>>}) {
     return(
-        <div>
+        <div className="w-fit h-fit">
             {allOptions.map((option, index) => (
                 <SelectOneMenuButton key={option} title={option} select={setSelectedOption} isSelected={option == selectedOption} className={index != 0 ? `ml-2` : ``}/>
             ))}

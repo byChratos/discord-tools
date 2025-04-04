@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import modes, { getModeFlagFromName, Mode } from "../../data/Modes";
+import modes, { Mode } from "../../data/Modes";
 import { Time } from "../../data/Time";
 import { Date, months } from "../../data/Date";
 import { invoke } from "@tauri-apps/api/core";
 import DateTimeField from "./components/DateTimeField";
 import GenerateButton from "./components/GenerateButton";
 import ModeField from "./components/ModeField";
+import { getModeFlagFromName } from "../../libraries/General";
 
 function Timestamp() {
 

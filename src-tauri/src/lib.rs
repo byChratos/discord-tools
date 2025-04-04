@@ -72,6 +72,15 @@ fn get_days_of_month(month: u32, year: i32) -> Vec<DayWeekday> {
 }
 
 #[command]
+fn get_days_count_of_month(month: u32, year: i32) -> u32 {
+    NaiveDate::from_ymd_opt(year, month + 1, 1)
+        .unwrap_or_else(|| NaiveDate::from_ymd_opt(year + 1, 1, 1).unwrap())
+        .pred_opt()
+        .unwrap()
+        .day()
+}
+
+#[command]
 fn generate_timestamp(time: Time, date: Date, mode: Mode) -> String {
     //TODO let user select timezone
 
@@ -117,6 +126,7 @@ pub fn run() {
             get_time,
             get_date,
             get_days_of_month,
+            get_days_count_of_month,
             generate_timestamp
         ])
         .run(tauri::generate_context!())
