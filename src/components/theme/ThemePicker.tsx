@@ -14,10 +14,11 @@ function ThemePicker() {
     }, []);
 
     function changeTheme(to: string) {
-        store?.set('theme', to);
-        store?.save();
-
-        setTheme(to);
+        store?.set('theme', to).then(() => {
+            store.save().then(() => {
+                setTheme(to);
+            });
+        });
     }
 
     return(
