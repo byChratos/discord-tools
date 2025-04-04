@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import ScrollSelectorButton from "./ScrollSelectorButton";
-import { elementAtRelativeIndex } from "../../../libraries/General";
+import { elementAtRelativeIndex } from "../../libraries/General";
 import { twMerge } from "tailwind-merge";
+import ScrollSelectorButton from "./ScrollSelectorButton";
 
 function ScrollSelector({possibleValues, selectedValue, setSelectedValue, className}: {possibleValues: Array<string | number>, selectedValue: any, setSelectedValue: Dispatch<SetStateAction<any>>, className?: string}) {
 

@@ -2,7 +2,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import Layout from './Layout';
 import Home from '../pages/home/Home';
 import Timestamp from '../pages/timestamp/Timestamp';
-import { ThemeContext } from './ThemeContext';
+import { ThemeContext } from './theme/ThemeContext';
 import { useEffect, useState } from 'react';
 import { getValueFromStore } from '../libraries/Store';
 

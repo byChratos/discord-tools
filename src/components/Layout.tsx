@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import NavigationBar from "./NavigationBar";
-import { ThemeContext } from "./ThemeContext";
+import { ThemeContext } from "./theme/ThemeContext";
 import Footer from "./Footer";
 
 function Layout({ children }: { children: React.ReactNode }) {

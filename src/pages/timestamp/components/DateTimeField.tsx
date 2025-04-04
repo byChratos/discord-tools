@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import ScrollSelector from "./ScrollSelector";
+import ScrollSelector from "../../../components/scrollSelector/ScrollSelector";
 import { range } from "../../../libraries/General";
 import { months } from "../../../data/Date";
 
@@ -17,11 +17,11 @@ function DateTimeField({
     year: number, setYear: Dispatch<SetStateAction<number>>
 }) {
     return(
-        <div className="w-full h-fit min-h-[200px] p-5 flex flex-row rounded-xl bg-red-500">
-            <h2>Time/Date</h2>
+        <div className="w-full h-fit min-h-[200px] p-5 flex flex-row rounded-xl bg-bgSecondary">
+            <h2 className="text-textPrimary">Time/Date</h2>
 
             <ScrollSelector possibleValues={range(0, 23)} selectedValue={hour} setSelectedValue={setHour}/>
-            <p className="mt-auto mb-auto mr-1 ml-1 text-3xl">:</p>
+            <p className="mt-auto mb-auto mr-1 ml-1 text-3xl text-textPrimary">:</p>
             <ScrollSelector possibleValues={range(0, 59)} selectedValue={minute} setSelectedValue={setMinute}/>
 
             {/** Gap */}

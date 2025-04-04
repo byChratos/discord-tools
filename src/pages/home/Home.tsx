@@ -1,6 +1,6 @@
 import { checkForAppUpdates } from "../../libraries/Update";
 import { version } from "../../../package.json";
-import ThemePicker from "../../components/ThemePicker";
+import ThemePicker from "../../components/theme/ThemePicker";
 
 function Home() {
 
