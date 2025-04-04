@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import ModeField from "./components/mode/ModeField";
-import modes, { Mode } from "../../data/Modes";
-import { ModeContext } from "./components/mode/ModeContext";
+import modes, { getModeFlagFromName, Mode } from "../../data/Modes";
 import { Time } from "../../data/Time";
 import { Date, months } from "../../data/Date";
 import { invoke } from "@tauri-apps/api/core";
 import DateTimeField from "./components/DateTimeField";
 import GenerateButton from "./components/GenerateButton";
+import ModeField from "./components/ModeField";
 
 function Timestamp() {
 
@@ -17,7 +16,9 @@ function Timestamp() {
     const [month, setMonth] = useState<string>('January');
     const [year, setYear] = useState<number>(2000);
  
-    const [mode, setMode] = useState<Mode>(modes[0]);
+    const [mode, setMode] = useState<string>(modes[0].name);
+
+    //const [mode, setMode] = useState<Mode>(modes[0]);
 
     const [result, setResult] = useState<string | null>(null);
 
@@ -51,28 +52,30 @@ function Timestamp() {
             year: year
         };
 
-        invoke<string>('generate_timestamp', { time: time, date: date, mode: mode})
+        const selectedMode: Mode = {
+            name: mode,
+            flag: getModeFlagFromName(mode),
+        }
+
+        invoke<string>('generate_timestamp', { time: time, date: date, mode: selectedMode})
             .then((response) => setResult(response));
     }
 
     return(
         <div className="w-full h-fit p-3 flex flex-col mt-auto mb-auto">
-            <ModeContext.Provider value={{ mode, setMode }}>
+            <h1 className="text-textPrimary text-5xl">Creating a Timestamp</h1>
 
-                <h1 className="text-textPrimary text-5xl">Creating a Timestamp</h1>
+            <DateTimeField 
+                hour={hour} setHour={setHour}
+                minute={minute} setMinute={setMinute}
+                day={day} setDay={setDay}
+                month={month} setMonth={setMonth}
+                year={year} setYear={setYear}
+            />
 
-                <DateTimeField 
-                    hour={hour} setHour={setHour}
-                    minute={minute} setMinute={setMinute}
-                    day={day} setDay={setDay}
-                    month={month} setMonth={setMonth}
-                    year={year} setYear={setYear}
-                />
+            <ModeField selectedMode={mode} setSelectedMode={setMode}/>
 
-                <ModeField />
-
-                <GenerateButton result={result} setResult={setResult} onClick={generateTimestamp}/>
-            </ModeContext.Provider>
+            <GenerateButton result={result} setResult={setResult} onClick={generateTimestamp}/>
         </div>
     )
 }

@@ -24,8 +24,6 @@ function DateTimeField({
             <p className="mt-auto mb-auto mr-1 ml-1 text-3xl text-textPrimary">:</p>
             <ScrollSelector possibleValues={range(0, 59)} selectedValue={minute} setSelectedValue={setMinute}/>
 
-            {/** Gap */}
-
             <ScrollSelector className="ml-auto" possibleValues={range(1, 31)} selectedValue={day} setSelectedValue={setDay}/>
             <ScrollSelector className="ml-2" possibleValues={months} selectedValue={month} setSelectedValue={setMonth}/>
             <ScrollSelector className="ml-2" possibleValues={range(2000, 2100)} selectedValue={year} setSelectedValue={setYear}/>
