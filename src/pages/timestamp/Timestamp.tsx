@@ -63,10 +63,10 @@ function Timestamp() {
     }
 
     return(
-        <div className="w-full h-fit p-3 flex flex-col mt-auto mb-auto">
-            <h1 className="text-textPrimary text-5xl">Creating a Timestamp</h1>
+        <div className="w-full h-full p-3 flex flex-col">
+            <h1 className="text-textPrimary text-5xl mb-5">Timestamp</h1>
 
-            <DateTimeField 
+            <DateTimeField
                 hour={hour} setHour={setHour}
                 minute={minute} setMinute={setMinute}
                 day={day} setDay={setDay}

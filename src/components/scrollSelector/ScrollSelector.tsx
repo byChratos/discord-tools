@@ -33,15 +33,15 @@ function ScrollSelector({possibleValues, selectedValue, setSelectedValue, classN
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
             onWheel={handleScroll}
-            className={twMerge(className, "flex flex-col mt-auto mb-auto")}
+            className={twMerge(className, "flex flex-col mt-auto mb-auto [perspective:1000px]")}
         >
-            {isOpen && <ScrollSelectorButton className="text-s text-textSecondary" possibleValues={possibleValues} selectedValue={selectedValue} setSelectedValue={setSelectedValue} relativeIndex={+2}/>}
-            {isOpen && <ScrollSelectorButton className="text-lg text-textSecondary" possibleValues={possibleValues} selectedValue={selectedValue} setSelectedValue={setSelectedValue} relativeIndex={+1}/>}
+            {isOpen && <ScrollSelectorButton className="text-s text-textSecondary [transform:rotateX(40deg)]" possibleValues={possibleValues} selectedValue={selectedValue} setSelectedValue={setSelectedValue} relativeIndex={+2}/>}
+            {isOpen && <ScrollSelectorButton className="text-lg text-textSecondary [transform:rotateX(30deg)]" possibleValues={possibleValues} selectedValue={selectedValue} setSelectedValue={setSelectedValue} relativeIndex={+1}/>}
                             
             <button className="w-[150px] py-2 rounded-lg bg-blue-900 text-2xl text-textPrimary">{selectedValue}</button>
                             
-            {isOpen && <ScrollSelectorButton className="text-lg text-textSecondary" possibleValues={possibleValues} selectedValue={selectedValue} setSelectedValue={setSelectedValue} relativeIndex={-1}/>}
-            {isOpen && <ScrollSelectorButton className="text-s text-textSecondary" possibleValues={possibleValues} selectedValue={selectedValue} setSelectedValue={setSelectedValue} relativeIndex={-2}/>}
+            {isOpen && <ScrollSelectorButton className="text-lg text-textSecondary [transform:rotateX(-30deg)]" possibleValues={possibleValues} selectedValue={selectedValue} setSelectedValue={setSelectedValue} relativeIndex={-1}/>}
+            {isOpen && <ScrollSelectorButton className="text-s text-textSecondary [transform:rotateX(-40deg)]" possibleValues={possibleValues} selectedValue={selectedValue} setSelectedValue={setSelectedValue} relativeIndex={-2}/>}
         </div>
     )
 }

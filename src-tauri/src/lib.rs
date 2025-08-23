@@ -93,12 +93,12 @@ fn generate_timestamp(time: Time, date: Date, mode: Mode) -> String {
 
     let unix = local_datetime.timestamp();
 
-    if mode.flag != "DO_NOT_SET" {
+    return if mode.flag != "DO_NOT_SET" {
         let formated_string = format!("<t:{}:{}>", unix, mode.flag);
-        return formated_string;
+        formated_string
     } else {
         let formated_string = format!("<t:{}>", unix);
-        return formated_string;
+        formated_string
     }
 }
 
